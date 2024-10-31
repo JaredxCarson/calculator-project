@@ -14,6 +14,8 @@ const operatorButtons = document.querySelectorAll('.operator');
 const equalsButton = document.getElementById('equals');
 const clearButton = document.getElementById('clear');
 const deleteButton = document.getElementById('delete');
+const decimalButton = document.getElementById('decimal');
+const percentButton = document.getElementById('percent');
 const display = document.getElementById('display');
 
 
@@ -49,7 +51,7 @@ function operate(operator, a, b) {
         case '*':
             return multiply(a, b); //Calls multiply function if operator is '*'
         case '/':
-            return divide(a, b); //Calls divide function if operator is '/'
+            return divide(a, b); //Calls divide function if operator is '/'  
         default:
             return null; //Return null if no valid operator is found              
     }
@@ -100,7 +102,26 @@ deleteButton.addEventListener('click', () => {
     }
 });
 
+//Event Listener for decimal button
+decimalButton.addEventListener('click', () => {
+    if (!currentOperand.includes('.')) { //Checks if current num has a decimal
+        currentOperand += '.'; //Adds decimal point
+        updateDisplay(); //Updates the display
+    }
+})
+
+//Event Listener for percent button
+percentButton.addEventListener('click', () => {
+    if (currentOperand) {
+        //Convert currentOperand to a percentage
+        currentOperand = (parseFloat(currentOperand) / 100).toString();
+        updateDisplay(); //Updates the display
+    }
+})
+
 //Function to update the display
 function updateDisplay(value) {
     display.textContent = value; //Set the text content to the provided value
 }
+
+
